@@ -5,12 +5,45 @@ import urllib.request
 import re
 import sys
 import makeUrl
+import csv
+import socket
 
 # redist
 print('------------------------------')
 
+
 base = makeUrl.base()
 url = makeUrl.makefromint(40)
+=======
+path = r'tl.csv'
+
+with open(path) as file:
+    reader = csv.DictReader(file)
+    a = []
+    for r in reader:
+            a.append(r['tl'])
+
+for t in a:
+    print(t)
+    socket.setdefaulttimeout(5)
+    #解决下载不完全问题且避免陷入死循环
+    try:
+        urllib.request.urlretrieve('http://onuma.com/transfer/SEPS/' + t,t)
+    except socket.timeout:
+        count = 1
+        while count <= 10:
+            try:
+                urllib.request.urlretrieve('http://onuma.com/transfer/SEPS/' + t,t)                                                
+                break
+            except socket.timeout:
+                err_info = 'Reloading for %d time'%count if count == 1 else 'Reloading for %d times'%count
+                print(err_info)
+                count += 1
+        if count > 5:
+            print("downloading failed!")
+
+url=makeUrl.makefromint(40)
+
 print(url)
 
 try:
