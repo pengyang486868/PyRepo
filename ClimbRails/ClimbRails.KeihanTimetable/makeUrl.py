@@ -1,5 +1,5 @@
-def make(str):
-    url = 'https://www.keihan.co.jp/traffic/station/stationinfo/' + str + '.html'
+def infobase():
+    url = 'https://www.keihan.co.jp/traffic/station/stationinfo/'
     return url
 
 def makefromint(n):

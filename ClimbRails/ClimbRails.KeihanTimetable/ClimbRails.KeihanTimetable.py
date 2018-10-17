@@ -5,84 +5,46 @@ import urllib.request
 import re
 import sys
 import makeUrl
-import csv
-import socket
-
-# redist
-print('------------------------------')
-
+import doDownload
 
 base = makeUrl.base()
-url = makeUrl.makefromint(40)
-=======
-path = r'tl.csv'
+infobase = makeUrl.infobase()
 
-with open(path) as file:
-    reader = csv.DictReader(file)
-    a = []
-    for r in reader:
-            a.append(r['tl'])
-
-for t in a:
-    print(t)
-    socket.setdefaulttimeout(5)
-    #解决下载不完全问题且避免陷入死循环
-    try:
-        urllib.request.urlretrieve('http://onuma.com/transfer/SEPS/' + t,t)
-    except socket.timeout:
-        count = 1
-        while count <= 10:
-            try:
-                urllib.request.urlretrieve('http://onuma.com/transfer/SEPS/' + t,t)                                                
-                break
-            except socket.timeout:
-                err_info = 'Reloading for %d time'%count if count == 1 else 'Reloading for %d times'%count
-                print(err_info)
-                count += 1
-        if count > 5:
-            print("downloading failed!")
-
-url=makeUrl.makefromint(40)
-
-print(url)
-
-try:
-    data = urllib.request.urlopen(url)
-except urllib.error.HTTPError as e:
-    print(e)
-    sys.exit()
-
-datastr = data.read().decode()
-
-l = len(datastr)
-if l > 0:
-    print(l)
-#print(datastr)
 title_str = r'<title>(.+?)｜電車・駅のご'
 title_comp = re.compile(title_str)
 
-timetable_str = r'<li><span>(.+?)</span><a href="(.+?)" target="_blank"><img src="img/timetable_weekday.gif" alt="(.+?)（PDF）" width="85" height="21" /></a><a href="(.+?)" target="_blank"><img src="img/timetable_holiday.gif" alt="(.+?)（PDF'
+timetable_str = r'<li><span>(.+?)</span><a href="(.+?)" target="_blank"><img src="img/timetable_weekday.gif" alt="(.+?)（PDF）"  ??width="85" height="21" ??/></a><a href="(.+?)" target="_blank"><img src="img/timetable_holiday.gif" alt="(.+?)（PDF'
 timetable_comp = re.compile(timetable_str)
 
 struct_str = r'<p><a href="(.+?)" target="_blank"><.+? alt="駅構内図'
 struct_comp = re.compile(struct_str)
 
-title = title_comp.findall(datastr)
-timetables = timetable_comp.findall(datastr)
-struct = struct_comp.findall(datastr)
+for id in range(9,300):
+    url = makeUrl.makefromint(id)
+    try:
+        data = urllib.request.urlopen(url)
+    except urllib.error.HTTPError as e:
+        continue
 
-print(title)
-for r in timetables:
-    print(r)
-print(struct)
-print(struct[0])
-print(timetables[0][2])
+    datastr = data.read().decode()
 
-os.mkdir(r'E:\keihan\kkk')
-fpath = r'E:\keihan\try.pdf'
-fp = open(fpath,'w')
-fp.close()
-urllib.request.urlretrieve(base + timetables[0][1],fpath)
-urllib.request.urlretrieve(base + timetables[0][1],'xx.pdf')
+    title = title_comp.findall(datastr)
+    timetables = timetable_comp.findall(datastr)
+    struct = struct_comp.findall(datastr)
+
+    #print(title)
+    #print(timetables)
+    #print(struct)
+    #print(struct[0])
+    #print(timetables[0][1])
+
+    folder = "E:\\keihan\\" + str(id) + title[0]
+    os.mkdir(folder)
+    
+    for tableIndex in range(0,len(timetables)):
+        direction = timetables[tableIndex][0]
+        doDownload.downloadOneFile(base + timetables[tableIndex][1],folder + "\\" + direction + "-" + timetables[tableIndex][2] + ".pdf")
+        doDownload.downloadOneFile(base + timetables[tableIndex][3],folder + "\\" + direction + "-" + timetables[tableIndex][4] + ".pdf")
+    doDownload.downloadOneFile(infobase + struct[0],folder + "\\struct.pdf")
 
 

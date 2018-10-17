@@ -22,6 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ClimbRails.KeihanTimetable.py" />
+    <Compile Include="doDownload.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="makeUrl.py">
       <SubType>Code</SubType>
     </Compile>
