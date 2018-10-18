@@ -7,6 +7,8 @@ import sys
 import makeUrl
 import doDownload
 
+startwith = 120
+
 base = makeUrl.base()
 infobase = makeUrl.infobase()
 
@@ -19,7 +21,7 @@ timetable_comp = re.compile(timetable_str)
 struct_str = r'<p><a href="(.+?)" target="_blank"><.+? alt="駅構内図'
 struct_comp = re.compile(struct_str)
 
-for id in range(9,300):
+for id in range(startwith,300):
     url = makeUrl.makefromint(id)
     try:
         data = urllib.request.urlopen(url)
