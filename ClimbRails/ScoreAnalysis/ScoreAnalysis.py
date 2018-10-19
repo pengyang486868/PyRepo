@@ -1,5 +1,6 @@
 import functools
 import csv
+import numpy
 
 def getdata(str):
     path = r'data.csv'
@@ -20,6 +21,7 @@ def cmp(x,y):
     return 0
 
 # main process
+a=numpy.random.rand(4,4)
 data = getdata('All Students')
 stat = []
 global find
