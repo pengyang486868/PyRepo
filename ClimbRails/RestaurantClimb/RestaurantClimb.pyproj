@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3b080d61-e027-439d-bb66-4ab969444339</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>RetrieveWrite.py</StartupFile>
+    <StartupFile>pdoutput.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NetCode.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="pdoutput.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RestaurantClimb.py" />
