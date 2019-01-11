@@ -2,13 +2,13 @@ import csv
 import numpy as np
 
 def read(path):
-    path = 'E:\\work\\TF\\data\\'+path
+    path = 'E:\\work\\TF\\data\\' + path
     with open(path) as file:
         reader = csv.reader(file)
         a = []
         for r in reader:
                 a.append(r)
-        return a
+        return np.asarray(a,dtype=int)
 
 def toonehot(lst):
     hundred = []
@@ -27,12 +27,15 @@ def toonehot(lst):
 def input(str):
     return read(str + '_input.csv')
 
+#def output(str):
+#    all = read(str + '_output.csv')
+#    result = []
+#    for n in all:
+#        result.append(toonehot(n))
+#    return np.asarray(result)
+
 def output(str):
-    all = read(str + '_output.csv')
-    result = []
-    for n in all:
-        result.append(toonehot(n))
-    return result
+    return read(str + '_output.csv')
 
 
 
