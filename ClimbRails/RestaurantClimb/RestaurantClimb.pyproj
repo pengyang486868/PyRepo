@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>3b080d61-e027-439d-bb66-4ab969444339</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>pdoutput.py</StartupFile>
+    <StartupFile>RetrieveWrite.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
