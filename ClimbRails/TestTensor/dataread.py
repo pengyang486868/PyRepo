@@ -9,7 +9,7 @@ def read(path):
         a = []
         for r in reader:
                 a.append(r)
-        return np.asarray(a,dtype=int)
+        return np.asarray(a,dtype=float)
 
 def toonehot(lst):
     hundred = []

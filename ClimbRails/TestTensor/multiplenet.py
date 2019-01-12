@@ -2,9 +2,7 @@ import tensorflow as tf
 import numpy as np
 import dataread
 
-# 添加层
 def add_layer(inputs, in_size, out_size, activation_function=None):
-    # add one more layer and return the output of this layer
     Weights = tf.Variable(tf.random_normal([in_size, out_size]))
     biases = tf.Variable(tf.zeros([1, out_size]) + 0.1)
     Wx_plus_b = tf.matmul(inputs, Weights) + biases
@@ -21,16 +19,17 @@ print()
 
 input_dim = inputlist.shape[1]
 output_dim = outputlist.shape[1]
-hidden_dim = 10
+hidden_dim1 = 10
+hidden_dim2 = 10
 
 x = tf.placeholder(tf.float32, [None, input_dim])
 y_ = tf.placeholder(tf.float32, [None, output_dim])
 
-# 3.定义神经层：隐藏层和预测层
-# add hidden layer 输入值是 xs，在隐藏层有 10 个神经元
-hidden_layer = add_layer(x, input_dim, hidden_dim, activation_function=tf.nn.sigmoid)
-# add output layer 输入值是隐藏层 l1，在预测层输出 1 个结果
-y = add_layer(hidden_layer, hidden_dim, output_dim, activation_function=None)
+
+hidden_layer1 = add_layer(x, input_dim, hidden_dim1, activation_function=tf.nn.sigmoid)
+hidden_layer2 = add_layer(hidden_layer1, hidden_dim1, hidden_dim2, activation_function=tf.nn.sigmoid)
+
+y = add_layer(hidden_layer2, hidden_dim2, output_dim, activation_function=None)
 
 loss = tf.reduce_mean(tf.reduce_sum(tf.square(y_ - y),reduction_indices=[1]))
 
@@ -44,10 +43,10 @@ sess.run(init)
 inputtest = dataread.input('validate')
 outputtest = dataread.output('validate')
 
-num=1000001
+num=400001
 for i in range(num):
     sess.run(train_step, feed_dict={x: inputlist, y_: outputlist})
-    if i % 50000 == 0:        
+    if i % 10000 == 0:        
         print(i / num)
         yargmax = sess.run(tf.argmax(y,1),feed_dict={x:inputtest})
         yargmax_correct = sess.run(tf.argmax(y_,1),feed_dict={y_:outputtest})
@@ -65,3 +64,4 @@ for i in range(num):
         print(cnt)
         print(abserror)
         print()
+

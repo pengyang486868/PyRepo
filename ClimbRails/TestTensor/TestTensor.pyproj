@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>6236bc04-53e8-40d8-badd-37a9fbf6c142</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>learnbinary.py</StartupFile>
+    <StartupFile>another.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="another.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="anothermult.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="dataread.py">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +34,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="learnbynet.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="multiplenet.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="netlearn.py">

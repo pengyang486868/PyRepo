@@ -18,8 +18,8 @@ input_dim = inputlist.shape[1]
 output_dim = outputlist.shape[1]
 
 x = tf.placeholder(tf.float32, [None, input_dim])
-W = tf.Variable(tf.zeros([input_dim,output_dim]))
-b = tf.Variable(tf.zeros([output_dim]))
+W = tf.Variable(tf.random_normal([input_dim,output_dim]))
+b = tf.Variable(tf.random_normal([output_dim]))
 
 y_ = tf.placeholder("float", [None,output_dim])
 
@@ -49,6 +49,7 @@ for i in range(num):
         print(yargmax)
         print(yargmax_correct)
         print(sess.run(b))
+        print(sess.run(cross_entropy,feed_dict={x: inputtest, y_: outputtest}))
         cnt = 0
         abserror = 0
         for i in range(50):

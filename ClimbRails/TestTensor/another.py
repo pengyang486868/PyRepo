@@ -32,7 +32,7 @@ hidden_layer = add_layer(x, input_dim, hidden_dim, activation_function=tf.nn.sig
 # add output layer 输入值是隐藏层 l1，在预测层输出 1 个结果
 y = add_layer(hidden_layer, hidden_dim, output_dim, activation_function=None)
 
-loss = tf.reduce_mean(tf.reduce_sum(tf.square(y_ - y),reduction_indices=[1]))
+loss = tf.sqrt(tf.reduce_mean(tf.reduce_sum(tf.square(1 - y / y_),reduction_indices=[1])))
 
 train_step = tf.train.GradientDescentOptimizer(0.05).minimize(loss)
 
@@ -44,24 +44,18 @@ sess.run(init)
 inputtest = dataread.input('validate')
 outputtest = dataread.output('validate')
 
-num=1000001
+num = 1000001
 for i in range(num):
     sess.run(train_step, feed_dict={x: inputlist, y_: outputlist})
     if i % 50000 == 0:        
         print(i / num)
-        yargmax = sess.run(tf.argmax(y,1),feed_dict={x:inputtest})
-        yargmax_correct = sess.run(tf.argmax(y_,1),feed_dict={y_:outputtest})
-        print(yargmax)
-        print(yargmax_correct)
-        #print(sess.run(b))
-        #print(sess.run(cross_entropy,feed_dict={x: inputtest, y_: outputtest}))
+        yargmax = sess.run(y,feed_dict={x:inputtest})
+        yargmax_correct = sess.run(y_,feed_dict={y_:outputtest})
+        print(np.hstack((yargmax,yargmax_correct)))
         print(sess.run(loss, feed_dict={x: inputlist, y_: outputlist}))
         cnt = 0
         abserror = 0
         for i in range(50):
             abserror+=np.abs(yargmax[i] - yargmax_correct[i])
-            if yargmax[i] == yargmax_correct[i]:
-                cnt+=1
-        print(cnt)
-        print(abserror)
+        print(abserror / 50)
         print()
