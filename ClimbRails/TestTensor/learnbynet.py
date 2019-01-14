@@ -44,7 +44,7 @@ sess.run(init)
 inputtest = dataread.input('validate')
 outputtest = dataread.output('validate')
 
-num=1000001
+num = 1000001
 for i in range(num):
     sess.run(train_step, feed_dict={x: inputlist, y_: outputlist})
     if i % 50000 == 0:        
@@ -54,11 +54,12 @@ for i in range(num):
         print(yargmax)
         print(yargmax_correct)
         #print(sess.run(b))
-        #print(sess.run(cross_entropy,feed_dict={x: inputtest, y_: outputtest}))
+        #print(sess.run(cross_entropy,feed_dict={x: inputtest, y_:
+        #outputtest}))
         print(sess.run(loss, feed_dict={x: inputlist, y_: outputlist}))
         cnt = 0
         abserror = 0
-        for i in range(50):
+        for i in range(inputtest.shape[0]):
             abserror+=np.abs(yargmax[i] - yargmax_correct[i])
             if yargmax[i] == yargmax_correct[i]:
                 cnt+=1

@@ -2,8 +2,8 @@ import csv
 import numpy as np
 
 def read(path):
-    #path = 'E:\\work\\TF\\data\\' + path
-    path = 'D:\\tf\\data\\' + path
+    path = 'E:\\work\\TF\\data\\' + path
+    #path = 'D:\\tf\\data\\' + path
     with open(path) as file:
         reader = csv.reader(file)
         a = []

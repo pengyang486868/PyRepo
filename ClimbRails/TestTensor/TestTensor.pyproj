@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>6236bc04-53e8-40d8-badd-37a9fbf6c142</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>another.py</StartupFile>
+    <StartupFile>multiplenet.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
