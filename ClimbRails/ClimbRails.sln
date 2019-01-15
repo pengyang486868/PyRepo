@@ -11,6 +11,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "RestaurantClimb", "Restaura
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TestTensor", "TestTensor\TestTensor.pyproj", "{6236BC04-53E8-40D8-BADD-37A9FBF6C142}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "MnistTrain", "MnistTrain\MnistTrain.pyproj", "{C4A05A9C-CBEE-47B1-964E-FF16350E2578}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,8 @@ Global
 		{3B080D61-E027-439D-BB66-4AB969444339}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6236BC04-53E8-40D8-BADD-37A9FBF6C142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6236BC04-53E8-40D8-BADD-37A9FBF6C142}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4A05A9C-CBEE-47B1-964E-FF16350E2578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4A05A9C-CBEE-47B1-964E-FF16350E2578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
